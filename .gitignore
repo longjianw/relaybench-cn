@@ -1,0 +1,12 @@
+node_modules/
+dist/
+.env
+.env.*
+*.log
+.DS_Store
+reports/
+coverage/
+output/
+.playwright-cli/
+PROJECT_STATUS.md
+模型验真台.app/
