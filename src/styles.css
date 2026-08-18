@@ -109,6 +109,37 @@ button:disabled {
   font-size: 13px;
 }
 
+.topbar-actions {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.feedback-link {
+  min-height: 34px;
+  padding: 0 10px;
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  border: 1px solid #d8dfe1;
+  border-radius: 6px;
+  color: #364145;
+  background: #ffffff;
+  font-size: 13px;
+  font-weight: 650;
+  text-decoration: none;
+}
+
+.feedback-link:hover {
+  border-color: #aeb9bc;
+  background: #f5f7f8;
+}
+
+.feedback-link:focus-visible {
+  outline: 3px solid rgba(22, 132, 100, 0.2);
+  outline-offset: 2px;
+}
+
 .status-dot {
   width: 8px;
   height: 8px;
@@ -852,6 +883,20 @@ main {
 
   .environment-status {
     font-size: 0;
+  }
+
+  .topbar-actions {
+    gap: 8px;
+  }
+
+  .feedback-link {
+    width: 36px;
+    padding: 0;
+    justify-content: center;
+  }
+
+  .feedback-link span {
+    display: none;
   }
 
   main {

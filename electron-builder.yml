@@ -1,0 +1,28 @@
+appId: com.longjianw.relaybench-cn
+productName: 模型验真台
+electronVersion: 37.10.3
+artifactName: RelayBench-CN-${version}-${arch}.${ext}
+directories:
+  output: ../release
+  buildResources: ../build
+files:
+  - "**/*"
+npmRebuild: false
+nodeGypRebuild: false
+asar: true
+mac:
+  icon: ../build/icon.icns
+  category: public.app-category.developer-tools
+  target:
+    - target: dmg
+      arch:
+        - arm64
+dmg:
+  title: 模型验真台 ${version}
+  contents:
+    - x: 140
+      y: 180
+    - x: 420
+      y: 180
+      type: link
+      path: /Applications

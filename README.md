@@ -56,7 +56,25 @@ flowchart LR
   D --> E[Markdown / JSON 报告]
 ```
 
-## 快速开始
+## 下载 Mac 应用
+
+适用于 Apple 芯片 Mac（M1/M2/M3/M4）：
+
+1. 在 GitHub Releases 下载 `RelayBench-CN-0.2.1-arm64.dmg`；
+2. 打开 DMG，把“模型验真台”拖入“应用程序”；
+3. 首次打开时，在 Finder 的“应用程序”中右键“模型验真台”，选择“打开”；
+4. 后续可直接双击启动，不需要安装 Node.js，也不需要使用命令行。
+
+当前安装包尚未使用 Apple Developer 证书签名，因此首次打开会出现 macOS 安全提示。应用只在本机启动服务，评测密钥不会写入磁盘或报告。
+
+### 使用条件
+
+- 比较“官方 Codex”：本机需要安装 ChatGPT Mac 应用并已登录可用账号；
+- 比较“当前 CC Switch 供应商”：本机需要已经通过 CC Switch 配置 Codex；
+- 比较“自定义 API”：填写 OpenAI-compatible API 地址、模型 ID 和自己的 Key；这一模式不要求安装 Codex；
+- 普通 HTTP API 目前只运行响应题，代码仓库修改任务需要 Codex 环境。
+
+## 从源码运行
 
 要求：Node.js 22+。官方 Codex 和本机供应商对比目前以 macOS 为主要运行环境。
 
@@ -76,7 +94,7 @@ npm start
 npm run dev
 ```
 
-### 安装 Mac 启动应用
+### 从源码安装旧版 Mac 启动器
 
 ```bash
 npm run app:install
@@ -110,6 +128,16 @@ npm run build
 
 安全说明见 [SECURITY.md](SECURITY.md)，评测设计见 [docs/benchmark-design.md](docs/benchmark-design.md)。
 
+## 问题反馈
+
+应用右上角的“反馈问题”会打开 GitHub Issues 分类页，也可以直接访问 [提交问题或建议](https://github.com/longjianw/relaybench-cn/issues/new/choose)：
+
+- 安装或运行问题；
+- 供应商/API 兼容问题；
+- 新评测任务建议。
+
+提交前请删除 API Key、Bearer Token、患者信息、未经脱敏的本机配置和日志。可能导致密钥暴露或越界执行的安全漏洞不要公开发 Issue，请按 [SECURITY.md](SECURITY.md) 使用 GitHub 私密安全报告。
+
 ## 开发方式与贡献说明
 
 本项目由龙建伟从真实的第三方模型使用需求出发，提出产品问题、评测指标、医疗安全场景和验收方向；代码实现与迭代在 AI 编程工具协助下完成。项目不把“使用 AI 开发”包装成独立手写全部代码，重点展示的是问题定义、评测设计、产品判断与可验证交付。
@@ -119,7 +147,8 @@ npm run build
 - 完成受控的 3 次真实供应商对照
 - 增加模型替换、提示词注入与异常响应检测
 - 接入可扩展评测集与本地历史趋势
-- 发布可下载的 Mac 版本与不调用真实模型的在线展示页
+- 为 Mac 安装包增加 Apple 签名、公证和 Intel 版本
+- 发布不调用真实模型的在线展示页
 
 ## 维护与学习
 

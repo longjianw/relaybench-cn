@@ -11,6 +11,7 @@ import {
   FileJson,
   FlaskConical,
   Gauge,
+  Github,
   KeyRound,
   LoaderCircle,
   Play,
@@ -50,6 +51,8 @@ const modeOptions: Array<{ value: ProviderMode; label: string }> = [
   { value: "codex-current", label: "本机当前 Codex 配置" },
   { value: "http-api", label: "自定义 API" },
 ];
+
+const feedbackUrl = "https://github.com/longjianw/relaybench-cn/issues/new/choose";
 
 function formatDuration(ms: number): string {
   if (!ms) return "—";
@@ -358,6 +361,8 @@ export default function App() {
     },
     [benchmarks, repeatCount, selectedCases],
   );
+  const selectedProvidersNeedCodex = providers.some((provider) => provider.mode !== "http-api");
+  const environmentReady = !selectedProvidersNeedCodex || Boolean(systemInfo?.codexAvailable);
 
   const updateProvider = (index: number, provider: ProviderConfig) => {
     setProviders((current) => current.map((item, itemIndex) => (itemIndex === index ? provider : item)));
@@ -399,9 +404,21 @@ export default function App() {
             <p>RelayBench CN</p>
           </div>
         </div>
-        <div className="environment-status">
-          <span className={systemInfo?.codexAvailable ? "status-dot online" : "status-dot"} />
-          {systemInfo?.codexAvailable ? "本机 Codex 已连接" : "等待 Codex 环境"}
+        <div className="topbar-actions">
+          <div className="environment-status">
+            <span className={systemInfo?.codexAvailable ? "status-dot online" : "status-dot"} />
+            {systemInfo?.codexAvailable ? "本机 Codex 已连接" : "等待 Codex 环境"}
+          </div>
+          <a
+            className="feedback-link"
+            href={feedbackUrl}
+            target="_blank"
+            rel="noreferrer"
+            title="在 GitHub 提交问题或建议"
+          >
+            <Github size={17} />
+            <span>反馈问题</span>
+          </a>
         </div>
       </header>
 
@@ -492,7 +509,7 @@ export default function App() {
             <button
               type="button"
               className="primary-button"
-              disabled={running || !selectedCases.length || !systemInfo?.codexAvailable}
+              disabled={running || !selectedCases.length || !environmentReady}
               onClick={runBenchmark}
             >
               {running ? <LoaderCircle className="spin" size={18} /> : <Play size={18} fill="currentColor" />}

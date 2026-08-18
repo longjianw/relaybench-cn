@@ -1,5 +1,9 @@
 node_modules/
 dist/
+release/
+desktop/server.cjs
+build/icon.iconset/
+.desktop-package/
 .env
 .env.*
 *.log

@@ -1,0 +1,66 @@
+name: 安装或运行问题
+description: DMG、应用启动、Codex 检测或本机运行异常
+title: "[安装/运行] "
+body:
+  - type: markdown
+    attributes:
+      value: |
+        感谢反馈。请勿粘贴 API Key、Bearer Token、患者信息或未经脱敏的完整配置和日志。
+  - type: input
+    id: version
+    attributes:
+      label: 模型验真台版本
+      placeholder: 例如 0.2.1
+    validations:
+      required: true
+  - type: dropdown
+    id: mac
+    attributes:
+      label: Mac 类型
+      options:
+        - Apple 芯片（M1/M2/M3/M4）
+        - Intel 芯片
+        - 不确定
+    validations:
+      required: true
+  - type: input
+    id: macos
+    attributes:
+      label: macOS 版本
+      placeholder: 例如 macOS 15.5
+    validations:
+      required: true
+  - type: dropdown
+    id: stage
+    attributes:
+      label: 问题发生在哪一步
+      options:
+        - 下载或打开 DMG
+        - 拖入应用程序
+        - 首次打开应用
+        - 检测 Codex 或 CC Switch
+        - 开始评测
+        - 导出报告
+        - 其他
+    validations:
+      required: true
+  - type: textarea
+    id: description
+    attributes:
+      label: 问题描述
+      description: 请说明你做了什么、看到了什么，以及原本期待什么。
+    validations:
+      required: true
+  - type: textarea
+    id: redacted_error
+    attributes:
+      label: 已脱敏的错误信息
+      description: 可选。请先删除 Key、账号、用户名、本机路径和供应商私密地址。
+      render: text
+  - type: checkboxes
+    id: privacy
+    attributes:
+      label: 隐私确认
+      options:
+        - label: 我确认没有提交 API Key、Token、患者信息或未经脱敏的配置和日志。
+          required: true

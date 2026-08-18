@@ -1,0 +1,61 @@
+name: 新评测任务建议
+description: 建议增加更有区分度、可客观评分的响应题或代码任务
+title: "[评测建议] "
+body:
+  - type: markdown
+    attributes:
+      value: |
+        好的评测任务需要可重复、可客观判断，并说明它能证明什么、不能证明什么。医疗题只能使用完全合成资料。
+  - type: input
+    id: title
+    attributes:
+      label: 任务名称
+      placeholder: 例如 长上下文冲突来源判断
+    validations:
+      required: true
+  - type: dropdown
+    id: kind
+    attributes:
+      label: 任务类型
+      options:
+        - 响应题
+        - 代码仓库任务
+        - 稳定性或异常响应检测
+        - 其他
+    validations:
+      required: true
+  - type: textarea
+    id: capability
+    attributes:
+      label: 想测量的能力
+      description: 说明为什么现有任务不能覆盖这个差异。
+    validations:
+      required: true
+  - type: textarea
+    id: input
+    attributes:
+      label: 完全合成的示例输入
+      description: 不得包含患者信息、公司私有数据、付费题库或受版权保护的长文本。
+    validations:
+      required: true
+  - type: textarea
+    id: evaluator
+    attributes:
+      label: 客观评分或隐藏测试方法
+      description: 说明怎样判断通过、失败和部分得分。
+    validations:
+      required: true
+  - type: textarea
+    id: limits
+    attributes:
+      label: 这项测试不能证明什么
+      placeholder: 例如不能凭单题结果证明模型身份
+    validations:
+      required: true
+  - type: checkboxes
+    id: privacy
+    attributes:
+      label: 数据确认
+      options:
+        - label: 我确认示例为完全合成或可公开内容，不包含患者信息、密钥或私有数据。
+          required: true

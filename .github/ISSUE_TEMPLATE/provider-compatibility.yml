@@ -1,0 +1,72 @@
+name: 供应商/API 兼容问题
+description: CC Switch 当前线路或 OpenAI-compatible API 无法正常评测
+title: "[兼容性] "
+body:
+  - type: markdown
+    attributes:
+      value: |
+        只需提供公开的接口类型和脱敏错误。不要提交 API Key、完整请求头或未经脱敏的 CC Switch 配置。
+  - type: input
+    id: version
+    attributes:
+      label: 模型验真台版本
+      placeholder: 例如 0.2.1
+    validations:
+      required: true
+  - type: dropdown
+    id: connection
+    attributes:
+      label: 接入方式
+      options:
+        - CC Switch 当前供应商
+        - 自定义 Responses API
+        - 自定义 Chat Completions API
+        - 官方 Codex
+    validations:
+      required: true
+  - type: input
+    id: provider
+    attributes:
+      label: 供应商公开名称
+      description: 可选；不需要提供账号、Key 或私有中转地址。
+  - type: input
+    id: model
+    attributes:
+      label: 模型 ID
+      description: 填写接口中使用的公开模型 ID。
+    validations:
+      required: true
+  - type: dropdown
+    id: symptom
+    attributes:
+      label: 问题类型
+      options:
+        - 无法连接或鉴权失败
+        - 接口路径或协议不兼容
+        - 返回内容无法解析
+        - Token 或模型信息缺失
+        - 超时或流式响应异常
+        - 评分结果疑似错误
+        - 其他
+    validations:
+      required: true
+  - type: textarea
+    id: description
+    attributes:
+      label: 复现步骤与实际结果
+      description: 请使用合成内容复现，不要上传真实业务或患者资料。
+    validations:
+      required: true
+  - type: textarea
+    id: redacted_error
+    attributes:
+      label: 已脱敏的响应或错误
+      description: 删除 Authorization、Key、Cookie、本机路径和私密 URL 后再粘贴。
+      render: text
+  - type: checkboxes
+    id: privacy
+    attributes:
+      label: 隐私确认
+      options:
+        - label: 我确认内容已脱敏，不包含 Key、Token、患者信息或私有配置。
+          required: true

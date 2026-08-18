@@ -1,7 +1,6 @@
 import crypto from "node:crypto";
 import { existsSync } from "node:fs";
 import path from "node:path";
-import { fileURLToPath } from "node:url";
 import express from "express";
 import { z } from "zod";
 import type { BenchmarkRun } from "../shared/types";
@@ -78,8 +77,9 @@ app.post("/api/benchmark", async (request, response) => {
   }
 });
 
-const currentFile = fileURLToPath(import.meta.url);
-const distPath = path.resolve(path.dirname(currentFile), "../dist");
+const distPath = process.env.RELAYBENCH_DIST_PATH
+  ? path.resolve(process.env.RELAYBENCH_DIST_PATH)
+  : path.resolve(process.cwd(), "dist");
 if (process.env.NODE_ENV === "production" && existsSync(distPath)) {
   app.use(express.static(distPath));
   app.get("/{*splat}", (_request, response) => response.sendFile(path.join(distPath, "index.html")));

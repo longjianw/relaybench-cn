@@ -20,4 +20,6 @@ Workspace tasks run in temporary directories and may execute generated code. Run
 
 ## Reporting
 
-Please open a private security advisory in the GitHub repository for vulnerabilities that could expose secrets or execute outside the intended temporary workspace.
+Please open a [private security advisory](https://github.com/longjianw/relaybench-cn/security/advisories/new) for vulnerabilities that could expose secrets or execute outside the intended temporary workspace. Do not include real API keys, patient information, or unredacted local configuration in the report.
+
+Installation problems, provider compatibility issues, and benchmark suggestions can use the repository's public Issue forms after removing secrets and sensitive logs.

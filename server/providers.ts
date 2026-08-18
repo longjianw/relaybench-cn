@@ -47,9 +47,12 @@ function runProcess(
   options: { cwd: string; timeoutMs: number },
 ): Promise<ProcessResult> {
   return new Promise((resolve, reject) => {
-    const child = spawn(command, args, {
+    const useBundledNode = command === "node" && Boolean(process.env.RELAYBENCH_NODE_PATH);
+    const child = spawn(useBundledNode ? process.env.RELAYBENCH_NODE_PATH! : command, args, {
       cwd: options.cwd,
-      env: process.env,
+      env: useBundledNode
+        ? { ...process.env, ELECTRON_RUN_AS_NODE: "1" }
+        : process.env,
       stdio: ["ignore", "pipe", "pipe"],
     });
 
